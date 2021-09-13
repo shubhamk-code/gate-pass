@@ -1,0 +1,45 @@
+<!-- @format -->
+
+{% extends 'index.html' %} {% block content %} {% load static %}
+<div class="container" id="login-form">
+  <div class="auth">
+    {% if form.errors %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <p><strong>There was an error in the form. Please try again.</strong></p>
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endif %}
+
+    <div class="card" id="login-card">
+      <div class="auth__header text-center">
+        <a href="/">
+          <img src={% static 'images/paramLogo.jpg' %} alt="icon"
+          id="login-icon"/>
+        </a>
+        <h3>Signup form</h3>
+        <p>Hello Developer, Welcome to Param Technologies!</p>
+      </div>
+      <form
+        action="{% url 'register_user'%}"
+        class="form auth__form"
+        ,
+        method="POST"
+        ,
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %} {{ form.as_p }}
+        <div class="auth__actions">
+          <input class="btn btn--sub btn--lg" type="submit" value="Submit" />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}

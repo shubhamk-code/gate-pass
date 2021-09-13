@@ -1,0 +1,83 @@
+{% extends 'index.html'%}
+{% load static %}
+{% block content %}
+{% if user.is_authenticated %} 
+<section class="ftco-section">
+  <div class="container" id="table-container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 text-center mb-4">
+        <h2 class="heading-section">Employees Appointment List</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="h5 mb-4 text-center">Collapsible Table</h3>
+        <div class="table-wrap">
+          <table class="table myaccordion table-hover" id="accordion">
+            <thead>
+              <tr>
+                <th>Staff Name</th>
+                <th>Visitor Name</th>
+                <th>Status</th>
+                <th>Department</th>
+                {% comment %} <th>Edit</th>
+                <th>Del</th> {% endcomment %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for visitor in visitors %}
+              <tr
+                data-toggle="collapse"
+                data-target="#collapseOne"
+                aria-expanded="true"
+                aria-controls="collapseOne"
+              >
+                {% if visitor.staff != None and visitor.ban != "Banned" %}
+                <td>{{visitor.staff}}</td>
+                <td>{{visitor.name}}</td>
+                    {% if visitor.status == 'Active'%}
+                <td id="success-txt"><p class="text-success" >{{visitor.status}}</p></td>
+                    {% else %}
+                <td><p class="text-danger">{{visitor.status}}</p></td>
+                    {% endif %}
+                <td>{{visitor.department}}</td>
+                <td>
+                  <i class="fa" aria-hidden="true"></i>
+                </td>
+              </tr>
+              <tr>
+              {% endif %}
+                <td
+                  colspan="6"
+                  id="collapseOne"
+                  class="collapse show acc"
+                  data-parent="#accordion"
+                ></td>
+              </tr>
+              
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% else %}
+<div class="container" id="login-form">
+  <div class="auth">
+    <div class="card" id="login-card">
+      <div class="auth__header text-center">
+        <a href="/">
+          <img src={% static 'images/paramLogo.jpg' %} alt="icon"
+          id="login-icon"/>
+        </a>
+        <h4>Please Login!</h4>
+        <p><a href="{% url 'login' %}">Login</a> to view this page</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %} 
+
+{% endblock content %}

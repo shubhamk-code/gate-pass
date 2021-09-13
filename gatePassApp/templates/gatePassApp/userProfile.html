@@ -1,0 +1,259 @@
+<!-- @format -->
+
+{% extends 'index.html'%} {% block head-content %}
+{% load static %}
+<link
+  href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+  rel="stylesheet"
+  id="bootstrap-css"
+/>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link
+  rel="stylesheet"
+  href="{% static 'css/userProfile.css' %}"
+  type="text/css"
+/>
+<style>
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .container, .emp-profile * {
+    visibility: visible;
+  }
+  .auth__actions, .btn {
+    visibility: hidden;
+  }
+}
+</style>
+{% endblock head-content %} {% block content%}
+
+<div class="container emp-profile">
+  <form action="">
+  {% csrf_token %}
+    <div class="row">
+      <div class="col-md-4">
+        <div class="profile-img">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
+            alt="Not found"
+          />
+          <div class="file btn btn-lg btn-primary">
+            Change Photo
+            <input type="file" name="file" />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="profile-head">
+          <h1>{{user.name}}</h1>
+          
+          
+          
+          {% comment %} <h6>Web Developer and Designer</h6> {% endcomment %}
+          <p class="proile-rating">Status : <span>{{ user.status }}</span></p>
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                id="home-tab"
+                data-toggle="tab"
+                href="#home"
+                role="tab"
+                aria-controls="home"
+                aria-selected="true"
+                >About</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                id="profile-tab"
+                data-toggle="tab"
+                href="#profile"
+                role="tab"
+                aria-controls="profile"
+                aria-selected="false"
+                >Timeline</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-2">
+        {% comment %} <input
+          type="submit"
+          class="profile-edit-btn"
+          name="btnAddMore"
+          value="Edit Profile"
+        /> {% endcomment %}
+        {% comment %} <button onclick="window.print();">Print</button> {% endcomment %}
+        <div class="auth__actions">
+          <button class="btn btn--sub btn--lg" onclick="window.print();" name="Print" >Print</button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="profile-work">
+          <p display="none">WORK LINK</p>
+          {% comment %} <a href="">Website Link</a><br />
+          <a href="">Bootsnipp Profile</a><br />
+          <a href="">Bootply Profile</a> {% endcomment %}
+          <p display="none">SKILLS</p>
+          {% comment %} <a href="">Web Designer</a><br />
+          <a href="">Web Developer</a><br />
+          <a href="">WordPress</a><br />
+          <a href="">WooCommerce</a><br />
+          <a href="">PHP, .Net</a><br /> {% endcomment %}
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="tab-content profile-tab" id="myTabContent">
+          <div
+            class="tab-pane fade show active"
+            id="home"
+            role="tabpanel"
+            aria-labelledby="home-tab"
+          >
+            <div class="row">
+              <div class="col-md-6">
+                <label>User Id</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{ user.pass_no }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Name</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{ user.name }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Email</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{ user.email }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Age</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{ user.age }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Phone</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{ user.contact }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Profession</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{ user.company }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Department to be <br> visited</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{user.department.department_name}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Appointment with</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{user.staff}}</p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="profile"
+            role="tabpanel"
+            aria-labelledby="profile-tab"
+          >
+            <div class="row">
+              <div class="col-md-6">
+                <label>Department to be <br> visited</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{user.department.department_name}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Appointment with</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{user.staff}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Items</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{user.items}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>others</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{user.others}}</p>
+              </div>
+            </div>
+            {% comment %} <div class="row">
+              <div class="col-md-6">
+                <label>Total Projects</label>
+              </div>
+              <div class="col-md-6">
+                <p>230</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>English Level</label>
+              </div>
+              <div class="col-md-6">
+                <p>Expert</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Availability</label>
+              </div>
+              <div class="col-md-6">
+                <p>6 months</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <label>Your Bio</label><br />
+                <p>Your detail description</p>
+              </div>
+            </div> {% endcomment %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock content %}

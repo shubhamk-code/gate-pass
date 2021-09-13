@@ -1,0 +1,12 @@
+<!-- @format -->
+
+{% extends 'index.html' %} {%block content%}
+
+<form method="post" action="">
+  {% csrf_token %}
+  <p>Are you sure you want to delete "{{object}}"?</p>
+  <a href="{% url 'visitor' %}">Go back</a>
+  <input type="submit" value="Delete" />
+</form>
+
+{% endblock content%}
